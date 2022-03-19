@@ -8,14 +8,19 @@ const AddUser = props => {
   const [userNameState, setUserNameState] = useState('');
   const [userAgeState, setUserAgeState] = useState('');
   const addUserHandler = (event) => {
+    console.log("inside Add user")
+    console.log(userNameState, userAgeState)
     event.preventDefault();
-    if(userNameState.trim().length === 0 || userAgeState.trim.length === 0) {
+
+    if(userNameState.trim().length === 0 || userAgeState.trim().length === 0) {
       return;
     }
+    
     if(+userAgeState < 1) {
       return 
     }
-    console.log(userNameState, userAgeState)
+    
+    props.onUserAdd(userNameState, userAgeState)
     setUserNameState('');
     setUserAgeState('');
   };
@@ -35,7 +40,7 @@ const AddUser = props => {
         <input id='username' type='text' onChange={userNameChangeHandler} value={userNameState}/>
         <label>Age (Years)</label>
         <input id='age' type='number' onChange={userAgeChangeHandler} value={userAgeState}/>
-        <button type='submit'>Add User</button>
+        <button type='submit' onClick={addUserHandler}>Add User</button>
       </form>
     </Card>
   );
